@@ -99,6 +99,7 @@ let dogs = [{
 
 ]
 
+console.log(CLIENT_ORIGIN)
 app.use(
   cors({
     origin: CLIENT_ORIGIN
@@ -123,7 +124,7 @@ app.get('/api/dog', (req, res) => {
 })
 
 app.delete('/api/dog', (req, res)=> {
-  dogs.dequeue();
+  dogQueue.dequeue();
   res.sendStatus(204);
 })
 
