@@ -113,7 +113,7 @@ app.get('/api/cat', (req, res) => {
 
 app.delete('/api/cat', (req, res)=> {
   catQueue.dequeue();
-  res.sendStatus(204);
+  res.json(peek(catQueue));
 })
 
 
@@ -125,7 +125,7 @@ app.get('/api/dog', (req, res) => {
 
 app.delete('/api/dog', (req, res)=> {
   dogQueue.dequeue();
-  res.sendStatus(204);
+  res.json(peek(dogQueue));
 })
 
 app.use(
