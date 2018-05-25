@@ -1,6 +1,7 @@
 Petful App - Developed by Kevin & Julie
 
-A live version can be found at (url here)
+https://git.heroku.com/petfulapp-kj.git
+
 
 Overview This full stack app retrieves available animals to adopt from our API and allows you to see these animals, and hopefully adopt one, on our frontend.
 
