@@ -99,6 +99,12 @@ let dogs = [{
 
 ]
 
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
+
 app.get('/api/cat', (req, res) => {
   populateQueue(catQueue, cats);
   res.json(peek(catQueue));
@@ -126,14 +132,6 @@ app.use(
     skip: (req, res) => process.env.NODE_ENV === 'test'
   })
 );
-
-app.use(
-  cors({
-    origin: CLIENT_ORIGIN
-  })
-);
-
-
 
 function runServer(port = PORT) {
   const server = app
