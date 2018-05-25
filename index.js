@@ -3,12 +3,25 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const Queue = require('./queue');
+const peek  = require('./peek');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
 // const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
 
 const app = express();
+
+function populateQueue(queue, data) {
+  data = [...data];
+
+  for (let i = 0; i < data.length; i++) {
+    queue.enqueue(data[i]);
+  }
+}
+
+const catQueue = new Queue();
+const dogQueue = new Queue();
 
 let cats = [{
     imageURL:'https://i.imgur.com/xeYCwti.png',   
@@ -87,19 +100,26 @@ let dogs = [{
 ]
 
 app.get('/api/cat', (req, res) => {
-  res.json(cats[0])
+  populateQueue(catQueue, cats);
+  res.json(peek(catQueue));
 })
 
 app.delete('/api/cat', (req, res)=> {
-
+  catQueue.dequeue();
+  res.sendStatus(204);
 })
 
 
 
 app.get('/api/dog', (req, res) => {
-  res.json(dogs[0])
+  populateQueue(dogQueue, dogs);
+  res.json(peek(dogQueue));
 })
 
+app.delete('/api/dog', (req, res)=> {
+  dogs.dequeue();
+  res.sendStatus(204);
+})
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {

@@ -12,19 +12,19 @@ class Queue {
       this.last = null;
     }
   
-    // enqueue(data) {
-    //   const node = new _Node(data);
+    enqueue(data) {
+      const node = new _Node(data);
   
-    //   if(this.first === null) {
-    //     this.first = node;
-    //   }
+      if(this.first === null) {
+        this.first = node;
+      }
   
-    //   if(this.last) {
-    //     node.next = this.last;
-    //     this.last.prev = node;
-    //   }
-    //   this.last = node;
-    // }
+      if(this.last) {
+        node.next = this.last;
+        this.last.prev = node;
+      }
+      this.last = node;
+    }
   
     dequeue() {
       if(this.first === null) {
@@ -42,7 +42,5 @@ class Queue {
     }
 }
 
-
-    
   
 module.exports = Queue;
