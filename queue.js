@@ -42,16 +42,7 @@ class Queue {
     }
 }
 
-function peek(queue) {
-    if (queue.first === null) {
-      return 'No Data';
-    }
-    
-    return queue.first.value;
-}
+
     
   
-module.exports = {
-    Queue,
-    peek
-}
+module.exports = Queue;
