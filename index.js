@@ -5,10 +5,101 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
-const { dbConnect } = require('./db-mongoose');
+// const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
 
 const app = express();
+
+let cats = [{
+    imageURL:'https://i.imgur.com/xeYCwti.png',   
+    imageDescription: 'Hello Kitty',
+    name: 'Fluffy',
+    sex: 'Female',
+    age: 2,
+    breed: 'Cat',
+    story: 'Thrown on the street'
+  },
+  {
+    imageURL:'https://i.imgur.com/HzQWGWb.jpg',   
+    imageDescription: 'Friendly Kitty',
+    name: 'Calpico',
+    sex: 'Female',
+    age: 3,
+    breed: 'Calico',
+    story: 'Thrown on the street'
+  },
+  {
+    imageURL:'https://i.imgur.com/aCNCr1Z.jpg',   
+    imageDescription: 'Orange Kitty',
+    name: 'Borange',
+    sex: 'Male',
+    age: 4,
+    breed: 'Orange Tabby',
+    story: 'Thrown on the street'
+  },
+  {
+    imageURL:'https://i.imgur.com/hnRXL53.jpg',   
+    imageDescription: 'Grey Kitty',
+    name: 'Greyson',
+    sex: 'Male',
+    age: 4,
+    breed: 'Grey Tabby',
+    story: 'Thrown on the street'
+  }]
+
+let dogs = [{
+    imageURL: 'https://i.imgur.com/qbRHEus.png',
+    imageDescription: 'A sophisticated dog.',
+    name: 'Sir Zeus',
+    sex: 'Male',
+    age: 3,
+    breed: 'Chipoodle',
+    story: 'Owner Passed away'
+  },
+  {
+    imageURL: 'https://i.imgur.com/seS6JnE.png',
+    imageDescription: 'Dog who likes to be found.',
+    name: 'Waldo',
+    sex: 'Male',
+    age: 1,
+    breed: 'Shihtzu',
+    story: 'Owner Passed away'
+  },
+  {
+    imageURL: 'https://i.imgur.com/6pYahQn.png',
+    imageDescription: 'A magical unicorn dog',
+    name: 'Sparkle',
+    sex: 'Male',
+    age: 3,
+    breed: 'Chinicorn',
+    story: 'Owner Passed away'
+  },
+  {
+    imageURL: 'https://i.imgur.com/o46Orkk.png',
+    imageDescription: 'A sea lovin dog',
+    name: 'One-Eye Pegleg',
+    sex: 'Male',
+    age: 3,
+    breed: 'Choodle',
+    story: 'Owner Passed away'
+  }
+
+]
+
+app.get('/api/cat', (req, res) => {
+  res.json(cats[0])
+})
+
+app.delete('/api/cat', (req, res)=> {
+
+})
+
+
+
+app.get('/api/dog', (req, res) => {
+  res.json(dogs[0])
+})
+
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
@@ -22,18 +113,7 @@ app.use(
   })
 );
 
-api.get('api/cat', (req, res) => {
-  res.json({
-      imageURL:'https://assets3.thrillist.com/v1/image/2622128/size/tmg-slideshow_l.jpg', 
-      imageDescription: 'Orange bengal cat with black stripes lounging on concrete.',
-      name: 'Fluffy',
-      sex: 'Female',
-      age: 2,
-      breed: 'Bengal',
-      story: 'Thrown on the street'
-  })
 
-})
 
 function runServer(port = PORT) {
   const server = app
@@ -47,7 +127,7 @@ function runServer(port = PORT) {
 }
 
 if (require.main === module) {
-  dbConnect();
+  // dbConnect();
   runServer();
 }
 
